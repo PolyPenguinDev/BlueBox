@@ -1,0 +1,10 @@
+int 0, int 100 => randirange -> var value
+
+string "Guess a number 0-100: " -> input -> toint -> var guess #guess
+var guess, var value => less -> exif 'more'
+var guess, var value => greater -> exif 'less'
+var guess, var value => equals -> goif 'win'
+
+string "Lower" -> print & go 'guess' #less
+string "Higher" -> print & go 'guess' #more
+string "You Win" -> print & end #win
