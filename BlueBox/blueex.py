@@ -44,6 +44,8 @@ def run(self, in1, in2, command, sid):
         elif command == "writefile":
             try:
                 if in2 == None:
+                    in1[0].seek(0)
+                    in1[0].truncate(0)
                     in1[0].write(in1[1])
                     add_request("wrote to file")
                     return in1[1]
