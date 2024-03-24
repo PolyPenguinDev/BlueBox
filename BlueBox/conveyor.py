@@ -1,8 +1,9 @@
 import time
 import random
-
+import blueex
 class cnv:
     def __init__(self):
+        self.bb_sid = None
         self.exec_line = 0
         self.exec_running = False
         self.tags = {}
@@ -32,7 +33,7 @@ class cnv:
                             word = ","
                         else:
                             word += letter
-            linel.append(word) #fibb
+            linel.append(word) 
             listed.append(linel)
         for i in enumerate(listed):
             tag = i[1][-1]
@@ -62,8 +63,7 @@ class cnv:
             except:
                 print("ERROR: invalid int (line "+str(self.exec_line)+")")
                 self.exec_running = False
-                return None
-                
+                return None               
         elif command == "end":
             self.exec_running = False
         elif command == "go":
@@ -279,6 +279,8 @@ class cnv:
                 print("ERROR: invalid float (line "+str(self.exec_line)+")")
                 self.exec_running = False
                 return None
+        elif command.startswith("bluebox."):
+            return blueex.run(self, in1, in2, command.replace("bluebox.", ""), self.bb_sid)
         else:
             print("ERROR: invalid function \""+ command+"\" (line "+str(self.exec_line)+")")
             self.exec_running = False
