@@ -1,0 +1,3 @@
+!Higher Lower Game
+'guess a number 0-100 : gant'
+{ : guess : guessed}

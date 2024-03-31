@@ -1,10 +1,20 @@
+bui.startgui "hl.bui" -> var gui
+
+string "" -> var guess
+int 0 -> var guesses
 int 0, int 100 => randirange -> var value
 
-string "Guess a number 0-100: " -> input -> toint -> var guess #guess
-var guess, var value => less -> exif 'more'
-var guess, var value => greater -> exif 'less'
-var guess, var value => equals -> goif 'win'
+go "wait" #wait
 
-string "Lower" -> print & go 'guess' #less
-string "Higher" -> print & go 'guess' #more
-string "You Win" -> print & end #win
+var guess -> toint -> var guesser & go "continue" #guessed
+string "" -> var guess #continue
+var guesses, int 1 => add -> var guesses
+var guesser, var value => less -> exif 'more' 
+var guesser, var value => greater -> exif 'less'
+var guesser, var value => equals -> goif 'win'
+
+string "Lower" -> var gant & go 'wait' #less
+string "Higher" -> var gant & go 'wait' #more
+var guesses -> tostring -> var guesses & string "You Won in ", var guesses => add -> var gant & go "end" #win
+sleep 2 #end
+var gui -> bui.closegui & end
